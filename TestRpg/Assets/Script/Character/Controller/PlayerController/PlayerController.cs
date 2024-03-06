@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
             //        target = hit.collider.transform;
             //    }
             //}
-
             AttackTarget();
         }
         else if(isAttackState == false)
