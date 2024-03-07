@@ -10,7 +10,7 @@ public class UIManager : SingletonCommon<UIManager>
 {
     Dictionary<string, GameObject> UI_dic = new ();
 
-    public GameObject OpenUI(string ui)
+    public GameObject OpenUI(string ui, bool isable)
     {
         if (UI_dic.ContainsKey(ui))
         {

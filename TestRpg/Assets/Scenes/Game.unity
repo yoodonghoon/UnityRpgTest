@@ -3761,11 +3761,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 429508, guid: 9c74caa742791864f9c678287121e6c9, type: 3}
   m_PrefabInstance: {fileID: 267605698}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &269862900 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6133429339202149495, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-  m_PrefabInstance: {fileID: 3512844236630332185}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &274614743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24059,14 +24054,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 927070283097817271, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: hitPoint
-      value: 
-      objectReference: {fileID: 269862900}
-    - target: {fileID: 927070283097817271, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: damageEffectPrefab
-      value: 
-      objectReference: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
     - target: {fileID: 1426086433374898869, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24110,10 +24097,6 @@ PrefabInstance:
     - target: {fileID: 5535196958650680977, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5535196958650680977, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
