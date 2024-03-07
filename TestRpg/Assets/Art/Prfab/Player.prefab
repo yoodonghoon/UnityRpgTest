@@ -4324,8 +4324,8 @@ MonoBehaviour:
   attackBehaviourList:
   - {fileID: 7221258124860636232}
   - {fileID: 5424066663483248690}
-  damageEffectPrefab: {fileID: 0}
-  hitPoint: {fileID: 2649645855768288231}
+  damageEffectPrefab: {fileID: 7226583673155636401, guid: a2ab56839e1c9504ea9d141e95d0b16b, type: 3}
+  hitPoint: {fileID: 6133429339202149495}
 --- !u!114 &2079707829348252818
 MonoBehaviour:
   m_ObjectHideFlags: 0

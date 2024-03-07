@@ -37,29 +37,13 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
 
         InitAttackBehaviour();
         CheckAttackBehaviour().Forget();
+
+        GameManager.Instance.Player = this;
     }
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            //Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
-            //// Check hit from ray
-            //RaycastHit hit;
-            //if (Physics.Raycast(ray, out hit, 100))
-            //{
-            //    Debug.Log("We hit " + hit.collider.name + " " + hit.point);
-
-            //    IDamagable damagable = hit.collider.GetComponent<IDamagable>();
-            //    if (damagable != null && damagable.IsAlive)
-            //    {
-            //        target = hit.collider.transform;
-            //    }
-            //}
-            AttackTarget();
-        }
-        else if(isAttackState == false)
+        if(isAttackState == false)
         {
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
@@ -86,7 +70,7 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
         }
     }
 
-    void AttackTarget()
+    public void AttackTarget()
     {
         if (CurrentAttackBehaviour == null)
         {

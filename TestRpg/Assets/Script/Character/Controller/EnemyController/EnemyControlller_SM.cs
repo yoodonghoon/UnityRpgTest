@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
 {
@@ -17,6 +18,9 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
     public bool IsAlive => helth > 0;
 
     public int isHitHash = Animator.StringToHash("IsHit");
+
+    public IObjectPool<EnemyControlller_SM> pool;
+    public CharacterController CharacterControllerCompoenet;
 
     protected override void Start()
     {
@@ -39,6 +43,13 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
         {
             FaceTarget();
         }
+    }
+
+    public void Init()
+    {
+        CharacterControllerCompoenet.enabled = true;
+        helth = 3;
+        stateMachine?.ChangeState<IdleState>();
     }
 
     public R ChangeState<R>() where R : State<EnemyController>
@@ -76,7 +87,7 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
 
     public void FaceTarget()
     {
-        if (!Target)
+        if (!Target || IsAlive == false)
         {
             return;
         }
@@ -120,45 +131,6 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
         await UniTask.WaitForSeconds(0.1f);
     }
 
-    public void EnableAttackCollider()
-    {
-        Debug.Log("Check Attack Event");
-        if (weaponCollider)
-        {
-            weaponCollider.enabled = true;
-        }
-
-
-        StartCoroutine("DisableAttackCollider");
-    }
-
-    IEnumerator DisableAttackCollider()
-    {
-        yield return new WaitForFixedUpdate();
-
-        if (weaponCollider)
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & targetMask) != 0)
-        {
-            //It matched one
-            Debug.Log("Attack Trigger: " + other.name);
-            PlayerController playerCharacter = other.gameObject.GetComponent<PlayerController>();
-            //playerCharacter?.TakeDamage(10, hitEffect);
-
-        }
-
-        if (((1 << other.gameObject.layer) & targetMask) == 0)
-        {
-            //It wasn't in an ignore layer
-        }
-    }
-
     private void OnAnimatorMove()
     {
         Vector3 position = agent.nextPosition;
@@ -172,18 +144,21 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
             return;
 
         helth -= damage;
+        if (damageEffectPrefab)
+            Instantiate<GameObject>(damageEffectPrefab, hitPoint);
 
-        if(IsAlive)
-        {
+        if (IsAlive)
             animator.SetTrigger(isHitHash);
-            if (damageEffectPrefab)
-                Instantiate<GameObject>(damageEffectPrefab, hitPoint);
-        }
         else
         {
             stateMachine.ChangeState<DeadState>();
-        }    
+            CharacterControllerCompoenet.enabled = false;
+            
+            InventoryManger.Instance.AddItem(Random.Range(0,10));
+            Invoke("Destory", 5);
+        }
     }
+
     public void OnExecuteAttack(int attackIndex)
     {
         CurrentAttackBehaviour?.ExecuteAttack(target.gameObject);
@@ -194,5 +169,15 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
     {
         get;
         private set;
+    }
+
+    public void SetPool(IObjectPool<EnemyControlller_SM> _pool)
+    {
+        pool = _pool;
+    }
+
+    public void Destory()
+    {
+        pool.Release(this);
     }
 }
