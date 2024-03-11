@@ -27,7 +27,6 @@ public class AttackState : State<EnemyController>
         attackStateController.enterAttackHandler += OnEnterAttackState;
         attackStateController.exitAttackHandler += OnExitAttackState;
 
-        //animator?.SetInteger(attackIndexHash, attackable.CurrentAttackBehaviour.animationIndex);
         animator?.SetTrigger(hashAttack);
     }
 
@@ -43,12 +42,12 @@ public class AttackState : State<EnemyController>
 
     public void OnEnterAttackState()
     {
-        Debug.Log("OnEnterAttackState()");
+        Debug.Log("OnEnterAttackState");
     }
 
     public void OnExitAttackState()
     {
-        Debug.Log("OnExitAttackState()");
+        Debug.Log("OnExitAttackState");
         stateMachine.ChangeState<IdleState>();
     }
 }

@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour
             ItemCountText.text = "";
         else
             ItemCountText.text = ItemCount.ToString();
+
         ItemImage.sprite = ItemData.ItemSprite;
     }
 

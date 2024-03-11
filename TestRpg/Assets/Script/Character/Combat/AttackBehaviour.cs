@@ -2,6 +2,12 @@
 
 public abstract class AttackBehaviour : MonoBehaviour
 {
+    [HideInInspector]
+    public LayerMask targetMask;
+
+    [SerializeField]
+    public bool IsAvailable => calcCoolTime >= coolTime;
+
     public int animationIndex;
     public int priority;
     public int damage;
@@ -13,18 +19,11 @@ public abstract class AttackBehaviour : MonoBehaviour
 
     public GameObject effectPrefab;
 
-    [HideInInspector]
-    public LayerMask targetMask;
-
-    [SerializeField]
-    public bool IsAvailable => calcCoolTime >= coolTime;
-
     protected virtual void Start()
     {
         calcCoolTime = coolTime;
     }
 
-    // Update is called once per frame
     protected void Update()
     {
         if (calcCoolTime < coolTime)

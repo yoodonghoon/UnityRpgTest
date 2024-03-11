@@ -21,6 +21,7 @@ public class Hud : MonoBehaviour
     {
         var inven = UIManager.Instance.OpenUI("Inventory");
         InventoryManger.Instance.Inventory = inven.GetComponent<Inventory>();
+        InventoryManger.Instance.InventoryInit();
         inven.transform.parent = transform.parent;
     }
 
@@ -29,4 +30,3 @@ public class Hud : MonoBehaviour
         GameManager.Instance.Player.AttackTarget();
     }
 }
-

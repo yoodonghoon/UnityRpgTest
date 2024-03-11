@@ -1,9 +1,6 @@
 ﻿public interface IAttackable
 {
-    AttackBehaviour CurrentAttackBehaviour
-    {
-        get;
-    }
+    AttackBehaviour CurrentAttackBehaviour {get;}
 
     void OnExecuteAttack(int attackIndex);
 }

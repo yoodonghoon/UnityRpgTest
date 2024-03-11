@@ -10,6 +10,7 @@ public class AttackStateController : MonoBehaviour
 
     public bool IsInAttack { get; private set; }
     private IAttackable Attackable;
+
     public void Start()
     {
         Attackable = GetComponent<IAttackable>();

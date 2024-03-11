@@ -7,15 +7,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour, IAttackable, IDamagable
 {
-    private CharacterController controller;
     [SerializeField]
     private LayerMask targetMask;
-
-    //private NavMeshAgent agent;
-    private Camera camera;
-
     [SerializeField]
     private Animator animator;
+
+    private CharacterController controller;
+    private Camera camera;
 
     readonly int moveHash = Animator.StringToHash("Move");
     readonly int attackTriggerHash = Animator.StringToHash("Attack");
@@ -29,6 +27,7 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
     public List<AttackBehaviour> attackBehaviourList = new();
     public GameObject damageEffectPrefab;
     public Transform hitPoint;
+    public AttackBehaviour CurrentAttackBehaviour {get; private set;}
 
     void Start()
     {
@@ -73,9 +72,7 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
     public void AttackTarget()
     {
         if (CurrentAttackBehaviour == null)
-        {
             return;
-        }
 
         if (!isAttackState && CurrentAttackBehaviour.IsAvailable)
         {
@@ -126,13 +123,8 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
 
     public void OnExecuteAttack(int attackIndex)
     {
-        //if(target)
-            CurrentAttackBehaviour?.ExecuteAttack();
+        CurrentAttackBehaviour?.ExecuteAttack();
     }
 
-    public AttackBehaviour CurrentAttackBehaviour
-    {
-        get;
-        private set;
-    }
+    
 }

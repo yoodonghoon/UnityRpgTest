@@ -1,10 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManger : SingletonCommon<InventoryManger>
 {
     public Inventory Inventory { get; set; }
+    public List<Item> OpenBeforeItem = new();
 
     public void AddItem(int itemIndex)
     {
@@ -16,6 +16,31 @@ public class InventoryManger : SingletonCommon<InventoryManger>
         newitem.ItemType = (ItemType)tableData.Type;
         newitem.ItemSprite = Resources.Load<Sprite>(tableData.ImagePath);
 
-        Inventory.AddItem(newitem);
+        if (Inventory != null)
+        {
+            if(OpenBeforeItem.Count != 0)
+            {
+                for(int i = 0; i < OpenBeforeItem.Count; ++i)
+                {
+                    Inventory.AddItem(OpenBeforeItem[i]);
+                }
+            }
+            Inventory.AddItem(newitem);
+        }
+        else
+            OpenBeforeItem.Add(newitem);
+    }
+
+    public void InventoryInit()
+    {
+        if (OpenBeforeItem.Count != 0)
+        {
+            for (int i = 0; i < OpenBeforeItem.Count; ++i)
+            {
+                Inventory.AddItem(OpenBeforeItem[i]);
+            }
+        }
+
+        OpenBeforeItem.Clear();
     }
 }

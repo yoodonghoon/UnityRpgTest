@@ -1,11 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UI
-{
-    INVENTORY,
-}
-
 public class UIManager : SingletonCommon<UIManager>
 {
     Dictionary<string, GameObject> UI_dic = new ();

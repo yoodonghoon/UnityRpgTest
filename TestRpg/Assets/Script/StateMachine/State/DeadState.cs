@@ -11,7 +11,5 @@ public class DeadState : State<EnemyController>
 
     public override void Update(float deltaTime)
     {
-        //if (stateMachine.elapsedTimeInState > 5)
-            //GameObject.Destroy(context.gameObject);
     }
 }

@@ -62,9 +62,7 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
         get
         {
             if (!Target)
-            {
                 return false;
-            }
 
             float distance = Vector3.Distance(transform.position, Target.position);
             return (distance <= CalcAttackRange);
@@ -88,9 +86,7 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
     public void FaceTarget()
     {
         if (!Target || IsAlive == false)
-        {
             return;
-        }
 
         Vector3 direction = (Target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));

@@ -2,10 +2,7 @@
 
 public interface IDamagable
 {
-    bool IsAlive
-    {
-        get;
-    }
+    bool IsAlive {get;}
 
     void TakeDamage(int damage, GameObject hitEffect);
 }
