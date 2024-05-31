@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UniRx;
+using System;
 
 [RequireComponent(typeof(CharacterController)), RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour, IAttackable, IDamagable
@@ -21,7 +23,16 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
     
     private bool isAttackState => GetComponent<AttackStateController>()?.IsInAttack ?? false;
 
-    public int helth = 100;
+    private float Helth = 100;
+    public float helth
+    {
+        get { return Helth; }
+        set 
+        {
+            Helth = Mathf.Clamp(value, 0, 100);
+            EventManager.Instance.PostNotification(EVENT_TYPE.HP, Helth);
+        }
+    }
     public bool IsAlive => helth > 0;
     public Transform target;
     public List<AttackBehaviour> attackBehaviourList = new();
@@ -38,6 +49,11 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
         CheckAttackBehaviour().Forget();
 
         GameManager.Instance.Player = this;
+
+        var clickstream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonUp(0));
+        clickstream.Buffer(clickstream.Throttle(TimeSpan.FromMilliseconds(250)))
+            .Where(x => x.Count >= 2)
+            .Subscribe(x => Debug.Log("DoubleClick"));
     }
 
     void Update()
@@ -76,7 +92,7 @@ public class PlayerController : MonoBehaviour, IAttackable, IDamagable
 
         if (!isAttackState && CurrentAttackBehaviour.IsAvailable)
         {
-            animator.SetInteger(attackIndexHash, Random.Range(0,2));
+            animator.SetInteger(attackIndexHash, UnityEngine.Random.Range(0,2));
             animator.SetTrigger(attackTriggerHash);
         }
     }

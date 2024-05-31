@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class Inventory : UIWindow
 {
     public Button ExitButton;
     public List<InventorySlot> Slots = new ();
@@ -10,9 +10,10 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         ExitButton.onClick.AddListener(ExitButtonAction);
+        windowName = "Inventory";
     }
 
-    void ExitButtonAction() => UIManager.Instance.UISet("Inventory", false);
+    void ExitButtonAction() => UIManager.Instance.UISet(windowName, false);
 
     public void AddItem(Item item)
     {
