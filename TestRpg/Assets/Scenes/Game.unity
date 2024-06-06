@@ -11943,6 +11943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterPrefab: {fileID: 4692163444378859216, guid: ef7d7dfc7c6ab314e859e903cb584d88, type: 3}
+  DamageTextPrefab: {fileID: 8795216577469638322, guid: 1edd3cd01cdd92d4aba6b5efb62548ff, type: 3}
 --- !u!4 &967227106
 Transform:
   m_ObjectHideFlags: 0
@@ -24156,18 +24157,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6135970598273873012, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: boxSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135970598273873012, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: boxSize.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7436616556634693687, guid: bb212efb89460f9489aea1ac8f98f67a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24184,5 +24173,5 @@ SceneRoots:
   - {fileID: 377595785}
   - {fileID: 1792342977}
   - {fileID: 395076818}
-  - {fileID: 967227106}
   - {fileID: 628076804}
+  - {fileID: 967227106}

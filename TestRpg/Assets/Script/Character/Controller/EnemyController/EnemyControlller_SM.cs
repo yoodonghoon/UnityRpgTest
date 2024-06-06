@@ -21,6 +21,7 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
 
     public IObjectPool<EnemyControlller_SM> pool;
     public CharacterController CharacterControllerCompoenet;
+    public Transform DamageTextPos;
 
     protected override void Start()
     {
@@ -140,6 +141,8 @@ public class EnemyControlller_SM : EnemyController, IAttackable, IDamagable
             return;
 
         helth -= damage;
+        GameManager.Instance.SpawnDamageText(DamageTextPos, damage.ToString());
+
         if (damageEffectPrefab)
             Instantiate<GameObject>(damageEffectPrefab, hitPoint);
 
